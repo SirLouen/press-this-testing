@@ -26,6 +26,11 @@
 add_action( 'wp_ajax_press-this-plugin-save-post', 'wp_ajax_press_this_plugin_save_post');
 add_action( 'wp_ajax_press-this-plugin-add-category', 'wp_ajax_press_this_plugin_add_category' );
 add_action( 'tool_box', 'press_this_tool_box' );
+add_filter( 'press_this_plugin_slug', 'custom_press_this_slug' );
+
+function custom_press_this_slug($slug) {
+    return 'press-this-testing';
+}
 
  /**
  * Ajax handler for saving a post from Press This.

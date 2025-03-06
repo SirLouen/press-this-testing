@@ -2,15 +2,15 @@
 /**
  * Press This
  *
- * Plugin Name: Press This
+ * Plugin Name: Press This Testing
  * Plugin URI:  https://wordpress.org
  * Description: A little tool that lets you grab bits of the web and create new posts with ease.
- * Version:     1.1.1
+ * Version:     1.0.0
  * Author:      WordPress Contributors
  * Author URI:  https://wordpress.org
  * License:     GPL-2.0+
  * License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * Text Domain: press-this
+ * Text Domain: press-this-testing
  * Domain Path: /languages
  */
  /*

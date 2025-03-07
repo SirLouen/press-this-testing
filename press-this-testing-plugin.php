@@ -32,6 +32,12 @@ function custom_press_this_slug($slug) {
     return 'press-this-testing';
 }
 
+add_filter( 'press_this_plugin_file', 'custom_press_this_file' );
+
+function custom_press_this_file($file) {
+    return 'press-this-testing/press-this-testing-plugin.php';
+}
+
  /**
  * Ajax handler for saving a post from Press This.
  *

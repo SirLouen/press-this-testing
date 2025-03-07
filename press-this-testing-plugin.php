@@ -38,6 +38,21 @@ function custom_press_this_file($file) {
     return 'press-this-testing/press-this-testing-plugin.php';
 }
 
+add_filter( 'press_this_execution_func', 'custom_press_this_func' );
+
+// This version Must crash because it doesn't return a callable
+// function custom_press_this_func() {
+//    return 'Crash Test';
+// }
+
+function custom_press_this_func() {
+    return function() {
+        include WP_PLUGIN_DIR . '/press-this-testing/class-wp-press-this-testing-plugin.php';
+        $wp_press_this = new WP_Press_This_Testing_Plugin();
+        $wp_press_this->html();
+    };
+}
+
  /**
  * Ajax handler for saving a post from Press This.
  *
@@ -45,7 +60,7 @@ function custom_press_this_file($file) {
  */
 function wp_ajax_press_this_plugin_save_post() {
 	include_once( plugin_dir_path( __FILE__ ) . 'class-wp-press-this-plugin.php' );
-	$wp_press_this = new WP_Press_This_Plugin();
+	$wp_press_this = new WP_Press_This_Testing_Plugin();
 	$wp_press_this->save_post();
 }
 
@@ -56,7 +71,7 @@ function wp_ajax_press_this_plugin_save_post() {
  */
 function wp_ajax_press_this_plugin_add_category() {
 	include_once( plugin_dir_path( __FILE__ ) . 'class-wp-press-this-plugin.php' );
-	$wp_press_this = new WP_Press_This_Plugin();
+	$wp_press_this = new WP_Press_This_Testing_Plugin();
 	$wp_press_this->add_category();
 }
 
@@ -156,7 +171,7 @@ function press_this_get_shortcut_link() {
 
 			$link = 'javascript:var d=document,w=window,e=w.getSelection,k=d.getSelection,x=d.selection,' .
 				's=(e?e():(k)?k():(x?x.createRange().text:0)),f=' . $url . ',l=d.location,e=encodeURIComponent,' .
-				'u=f+"?u="+e(l.href)+"&t="+e(d.title)+"&s="+e(s)+"&v=' . WP_Press_This_Plugin::VERSION . '";' .
+				'u=f+"?u="+e(l.href)+"&t="+e(d.title)+"&s="+e(s)+"&v=' . WP_Press_This_Testing_Plugin::VERSION . '";' .
 				'a=function(){if(!w.open(u,"t","toolbar=0,resizable=1,scrollbars=1,status=1,width=600,height=700"))l.href=u;};' .
 				'if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else a();void(0)';
 		}
@@ -166,7 +181,7 @@ function press_this_get_shortcut_link() {
 		$src = @file_get_contents( plugin_dir_path( __FILE__ ) . 'assets/bookmarklet.min.js' );
 
 		if ( $src ) {
-			$url = wp_json_encode( admin_url( 'press-this.php' ) . '?v=' . WP_Press_This_Plugin::VERSION );
+			$url = wp_json_encode( admin_url( 'press-this.php' ) . '?v=' . WP_Press_This_Testing_Plugin::VERSION );
 			$link = 'javascript:' . str_replace( 'window.pt_url', $url, $src );
 		}
 	}
